@@ -1,4 +1,4 @@
-# File Manager To EditorJs
+# Audio To EditorJs
 
 Allows you to record and upload audio to Editorjs.
 
@@ -9,13 +9,13 @@ Allows you to record and upload audio to Editorjs.
 Get the package
 
 ```shell
-npm i editor-js-audio --save
+npm i audio-editor-js --save
 ```
 
 Include module at your application
 
 ```javascript
-import Audio from "editor-js-audio";
+import Audio from "audio-editor-js";
 ```
 
 ## Usage
@@ -31,8 +31,6 @@ var editor = EditorJS({
     audio: {
       class: Audio,
       config: {
-        tokenCookieName: "token",
-        //or
         token: token,
         
         route: `https://test/api/file`,
@@ -48,15 +46,11 @@ var editor = EditorJS({
 
 | Field           | Type       | Description                                                       |
 | --------------  | ---------- | ----------------------------------------------------------------- |
-| token           | `string`   | authorization token                                               |
-| tokenCookieName | `string`   | the name of the authorization token                               |
-|                 |            | under which it is written in the cookie route for storage on the  |
-| route           | `string`   | server                                                            |
-| routeDelete     | `string`   | route to delete the audio file from the server                    |
-| saveServer      | `function` | A function that replaces the standard function of sending to the  |
-|                 |            | server                                                            |
-| deleteServer    | `function` | A function that replaces the standard function of deleting a file |
-|                 |            | on the server                                                     |
+| token           | `string`            | authorization token                                      |
+| route           | `string`            | server                                                   |
+| routeDelete     | `string`            | route to delete the audio file from the server           |
+| saveServer      | callback `function` | A function that replaces the standard function of sending to the server |
+| deleteServer    | callback `function` | A function that replaces the standard function of deleting a file on the server |
 
 ## output server
 
@@ -65,13 +59,17 @@ the server must give this json in response to the save request. If the server wo
 ```json
 {
     "data" : {
-        "url" : "https://example/hero.jpg",
-        "id" : "Name",
+        "url" : "https://test/file",
+        "id" : "123",
     }
 }
 ```
 
-## saveServer
+## delete server
+
+method `delete`
+
+## callback function saveServer
 
 A function that sends a file to a server. receives the file and to send to the server.
 Return has an object with a file reference and file id.
@@ -97,6 +95,28 @@ Return has an object with a file reference and file id.
             //   }
             // }
             return data;
+          } catch (e) {
+            console.error(e);
+          }
+        },
+      },
+    },
+  }
+```
+## callback function deleteServer
+
+The id of the file by means of which it can be deleted from the server is transferred
+
+```javascript
+  tools: {
+    ...
+    audio: {
+      class: Audio,
+      config: {
+        deleteServer: async (id) => {
+          console.log(id)
+          try {
+            await axios.delete(route, id)
           } catch (e) {
             console.error(e);
           }

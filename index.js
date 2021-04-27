@@ -43,9 +43,7 @@ class Audio {
       wrapper: 'ce-button-link__wrapper',
     };
 
-    if (config.tokenCookieName) {
-      axios.defaults.headers.common['Authorization'] = config.tokenCookieName
-    } else if (config.token) {
+     if (config.token) {
       axios.defaults.headers.common['Authorization'] = config.token
     }
 
@@ -184,7 +182,7 @@ class Audio {
   }
 
   /**
-   * записує файл на сервер
+   * Записує файл на сервер
    * writes the file to the server
    * 
    * @param {file} file - аудіофайл | audio file
@@ -219,7 +217,7 @@ class Audio {
     this.element.firstChild.classList.add('cdx-loader')
     try {
       if (this._settings.deleteServer) {
-        await this._settings.deleteServer()
+        await this._settings.deleteServer(this.data.id)
       } else {
         await axios.delete(this._settings.routeDelete + this.data.id)
       }
@@ -237,7 +235,8 @@ class Audio {
 
   async record() {
     /**
-     * запит на доступдо мікрофону та опис подій пулучення файлу і зупинки запису
+     * запит на доступ до мікрофону та опис подій долучення файлу і зупинки запису
+     * a request to access the microphone and a description of the file attachment and recording stop events
      */
     const stream = await navigator.mediaDevices.getUserMedia({
       audio: true,
@@ -259,7 +258,8 @@ class Audio {
     });
 
     /**
-     * створуння DOM елементів та подій для запису звуку
+     * Створення DOM елементів та подій для запису звуку
+     * Create DOM elements and events to record audio
      */
     let audio = this.element.firstChild,
       record = this.DOMCreate('div', 'audio__record'),
@@ -276,7 +276,6 @@ class Audio {
 
     record.append(play)
     play.addEventListener('click', (e) => {
-      console.log(record)
       mediaRecorder.start()
       record.removeChild(play)
       record.appendChild(stop)
@@ -290,8 +289,8 @@ class Audio {
   }
 
   /**
-   * створює DOM для запису та прослуховування аудіо
-   * creates a DOM to record and listen to audio
+   * Створює DOM для запису та прослуховування аудіо
+   * Creates a DOM to record and listen to audio
    * 
    * @returns {wrapper}
    */
@@ -323,13 +322,12 @@ class Audio {
     wrapper.append(save)
     wrapper.append(clear)
 
-    console.log(wrapper)
     return wrapper
   }
 
   /**
-   * створює та вертає потрібний DOM елемент враховуючи параметри data, _data
-   * creates and returns the required DOM element taking into account the parameters data, _data
+   * Створює та вертає потрібний DOM елемент враховуючи параметри data, _data
+   * Creates and returns the required DOM element taking into account the parameters data, _data
    * 
    * @returns {wrapper} обгортка блоку яка залишається незмінна | the wrapper of the block which remains unchanged
    */

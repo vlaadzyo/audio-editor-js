@@ -1,12 +1,25 @@
 {
   "name": "audio-editor-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "editorJs",
+    "editorjs audio",
+    "audio",
+    "record",
+    "editorjs record",
+    "editor.js",
+    "editorjs"
+  ],
   "author": "vlaadzyo@gmail.com",
+  "repository": {
+    "type": "git",
+    "url": "https://https://github.com/vlaadzyo/editor-js-audio"
+  },
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1"
