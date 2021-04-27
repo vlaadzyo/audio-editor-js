@@ -1,0 +1,63 @@
+.audio {
+  display: flex;
+}
+
+.audio audio {
+  width: 100%;
+}
+
+.audio__download {
+  width: 100%;
+  padding: 13px;
+  border-radius: 3px;
+  border: 1px solid rgba(201, 201, 204, .48);
+  font-size: 14.9px;
+  background: #fff;
+  -webkit-box-shadow: 0 2px 2px 0 rgb(18 30 57 / 4%);
+  box-shadow: 0 2px 2px 0 rgb(18 30 57 / 4%);
+  color: #707684;
+  text-align: center;
+  cursor: pointer;
+}
+
+.audio__recurd-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.audio__recurd-save {
+  padding: 12.5px;
+  border-radius: 50%;
+  margin: 0 10px;
+}
+
+.audio__recurd-clear {
+  padding: 12.5px;
+  border-radius: 50%;
+}
+
+.audio__clear {
+  padding: 12.5px;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+.audio.cdx-loader {
+  position: relative;
+  border: none;
+  pointer-events: none;
+}
+
+.audio.cdx-loader::after {
+  content: '';
+  position: absolute;
+  background-color: #fff;
+  opacity: .3;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.audio.cdx-loader::before {
+  z-index: 1;
+}
