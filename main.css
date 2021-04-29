@@ -20,18 +20,29 @@
   cursor: pointer;
 }
 
-.audio__recurd-wrapper {
+.audio__record {
   display: flex;
   width: 100%;
 }
 
-.audio__recurd-save {
+.audio__record-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.audio__record-name {
+  margin-right: 10px;
+  max-width: 300px;
+  width: 100%;
+}
+
+.audio__record-save {
   padding: 12.5px;
   border-radius: 50%;
   margin: 0 10px;
 }
 
-.audio__recurd-clear {
+.audio__record-clear {
   padding: 12.5px;
   border-radius: 50%;
 }
@@ -58,6 +69,7 @@
   right: 0;
   bottom: 0;
 }
+
 .audio.cdx-loader::before {
   z-index: 1;
 }

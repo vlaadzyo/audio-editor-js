@@ -47,7 +47,7 @@ var editor = EditorJS({
 | Field           | Type       | Description                                                       |
 | --------------  | ---------- | ----------------------------------------------------------------- |
 | token           | `string`            | authorization token                                      |
-| route           | `string`            | server                                                   |
+| route           | `string`            | route for storage on the server                          |
 | routeDelete     | `string`            | route to delete the audio file from the server           |
 | saveServer      | callback `function` | A function that replaces the standard function of sending to the server |
 | deleteServer    | callback `function` | A function that replaces the standard function of deleting a file on the server |
@@ -60,6 +60,7 @@ the server must give this json in response to the save request. If the server wo
 {
     "data" : {
         "url" : "https://test/file",
+        "name": "audio.webm",
         "id" : "123",
     }
 }
@@ -87,14 +88,16 @@ Return has an object with a file reference and file id.
             
             let req = await axios.post(route, formData);
 
-            // 
+            // such object should return here
+            
             //req = {
             //   data: {
             //     url: 'https://test/file/audio.mp3',
+            //     name: 'audio.webm',
             //     id: '123',
             //   }
             // }
-            return data;
+            return req;
           } catch (e) {
             console.error(e);
           }
@@ -114,7 +117,6 @@ The id of the file by means of which it can be deleted from the server is transf
       class: Audio,
       config: {
         deleteServer: async (id) => {
-          console.log(id)
           try {
             await axios.delete(route, id)
           } catch (e) {
